@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState, Fragment } from 'react'
+import BlogList from './blog/BlogList';
+import CssBaseline from '@mui/material/CssBaseline';
+import { styled } from "@mui/system";
+import backgroundImage from './images/Background2.png';
+import Header from './components/Header';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <CssBaseline />
+
+      <Header />
+      {/*  <Hero />
+        <Section />
+        <AboutUs />
+        <Testimonial />
+        <StyledBlogList></StyledBlogList>
+        <ContactUs />
+  <Footer />*/}
+
+    </Fragment>
   );
 }
 
