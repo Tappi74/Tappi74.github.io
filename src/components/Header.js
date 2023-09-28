@@ -17,6 +17,7 @@ import {
   import useStyles from '../styles/styles';
   import { useTheme } from '@mui/material/styles';
   import useMediaQuery from '@mui/material/useMediaQuery';
+  import Logo from '../images/FlounLogo.jpg';
   
   function ElevationScroll(props) {
     const { children, window } = props;
@@ -46,8 +47,9 @@ import {
   const Header = (props) => {
     const classes = useStyles();
     const links = [
-      { id: 1, route: 'About', url: 'https://blog.appseed.us/mui-react-coding-landing-page/' },
-      { id: 2, route: 'More Apps', url: 'https://appseed.us/apps/react' },
+      { id: 0, route: 'Blogi' },
+      { id: 1, route: 'Referenssit' },
+      { id: 2, route: 'Yhteys' }
     ];
   
     const [state, setState] = React.useState({
@@ -85,6 +87,10 @@ import {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('sm'));
   
+    // const onClick = () => {
+    //   console.log('clicked');
+    // };
+
     return (
       <Box sx={{ marginBottom: '70px' }}>
         <ElevationScroll {...props}>
@@ -92,7 +98,7 @@ import {
             <Toolbar className={classes.toolBar}>
               <Link href="#" underline="none">
                 <Typography variant="h5" className={classes.logo}>
-                  MUI Sample
+                  <img src={Logo} alt="Logo" />
                 </Typography>
               </Link>
   
@@ -124,7 +130,7 @@ import {
                 }}
               >
                 {links.map((link) => (
-                  <Link href={link.url} target="_blank" underline="none" key={link.id}>
+                  <Link onClick={props.onClick} target="_blank" underline="none" key={link.id}>
                     <Typography className={classes.link}>{link.route}</Typography>
                   </Link>
                 ))}
