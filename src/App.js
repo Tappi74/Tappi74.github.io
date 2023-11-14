@@ -15,7 +15,36 @@ import AboutUs from './components/AboutUs';
 
 function App() {
 
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [serviceSlider, setServiceSlider] = useState(false);
+  const [blogSlider, setBlogSlider] = useState(false);
+  const [referencesSlider, setReferencesSlider] = useState(false);
   const scrollToRef = useRef();
+
+  useEffect(() => {
+    function handleScroll() {
+      const newScrollPosition = window.scrollY;
+      //setScrollPosition(newScrollPosition);
+      if(newScrollPosition > 200){
+        setServiceSlider(true);
+      } 
+      if(newScrollPosition > 500){
+        setBlogSlider(true);
+      }
+      if(newScrollPosition > 1000){
+        setReferencesSlider(true);
+      }
+    }
+    window.addEventListener('scroll', handleScroll, {passive: true});
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  },[]);
+
+  useEffect(() => {
+    console.log(scrollPosition);
+  },[scrollPosition]);
 
   const onClick = () => {
     console.log(scrollToRef.current);
@@ -31,9 +60,9 @@ function App() {
 
       <Header onClick={onClick} />
         <Hero />
-        <Section />
-        <References />
-        <Blog />
+        <Section slide={serviceSlider} />
+        <Blog  slide={blogSlider} />
+        <References slide={referencesSlider} />
         <Footer ref={scrollToRef} />
         <AboutUs />
         {/*<Testimonial />

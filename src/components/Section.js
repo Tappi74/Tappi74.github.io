@@ -7,8 +7,9 @@ import Cloud from '@mui/icons-material/Cloud';
 import SupervisedUserCircle from '@mui/icons-material/SupervisedUserCircle';
 import LightbulbOutline from '@mui/icons-material/LightbulbCircleOutlined';
 import useStyles from '../styles/styles';
+import Slide from '@mui/material/Slide';
 
-const Section = () => {
+const Section = (props) => {
   const classes = useStyles();
 
   const sectionItems = [
@@ -30,10 +31,12 @@ const Section = () => {
       sentence: 'Jatkuvasti uudistuva ajattelutapamme mahdollistaa tuoreet näkökulmat ja ratkaisut, jotka erottavat sinut kilpailijoistasi.',
     },
   ];
+  
   return (
     <Box sx={{ flexGrow: 1, minHeight: '400px' }}>
       <Grid container className={classes.sectionGridContainer}>
         {sectionItems.map((item) => (
+          <Slide direction="left" in={props.slide} timeout={1000} key={item.id}>
           <Grid
             item
             xs={12}
@@ -45,6 +48,7 @@ const Section = () => {
             {item.icon}
             <Typography>{item.sentence}</Typography>
           </Grid>
+          </Slide>
         ))}
       </Grid>
     </Box>

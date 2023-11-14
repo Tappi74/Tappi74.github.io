@@ -47,10 +47,10 @@ import {
   const Header = (props) => {
     const classes = useStyles();
     const links = [
-      { id: 0, route: 'Blogi' },
-      { id: 1, route: 'Referenssit' },
-      { id: 2, route: 'Yhteys' }
+      { id: 0, route: 'Yhteys' }
     ];
+
+    
   
     const [state, setState] = React.useState({
       right: false,

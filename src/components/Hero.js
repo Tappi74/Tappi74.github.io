@@ -3,6 +3,8 @@ import { Grid, Typography, Button, Box } from '@mui/material';
 import myteam from '../images/myteam.jpg';
 import chip from '../images/heroPicture.png';
 import useStyles from '../styles/styles';
+import Fade from '@mui/material/Fade';
+import Slide from '@mui/material/Slide';
 
 const Hero = () => {
   const classes = useStyles();
@@ -31,9 +33,11 @@ const Hero = () => {
             OTA YHTEYTTÄ !
           </Button>
         </Grid>
+        <Slide in={true} direction="left" timeout={1000}>
         <Grid item xs={12} md={5}>
           <img src={chip} alt="My Team" className={classes.largeImage} />
         </Grid>
+        </Slide>
       </Grid>
     </Box>
   );

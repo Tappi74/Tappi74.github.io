@@ -63,11 +63,13 @@ const styles = () => {
             miHeight: '10vh',
             padding: '20px',
             justifyContent: 'center',
-            backgroundColor: '#f2f0f1',
+            backgroundColor: '#3B3B3D',
             flexDirection: 'column',
           },
           footerText: {
-            paddingBottom: '10px',
+            paddingLeft: '10px',
+            color: '#FFFFFF',
+            fontSize: '1.0rem'
           },
           footerDate: {
             opacity: '0.4',
@@ -89,6 +91,22 @@ const styles = () => {
             fontSize: '14px',
             opacity: '0.6',
           },
+          referencesBox: {
+            marginLeft: '10px',
+            paddingTop: '50px',
+            paddingBottom: '50px',
+            paddingLeft: '50px',
+            paddingRight: '50px',
+            backgroundColor: '#d9d5d4',
+          },
+          blogBox: {
+            marginLeft: '10px',
+            paddingTop: '50px',
+            paddingBottom: '50px',
+            paddingLeft: '50px',
+            paddingRight: '50px',
+            backgroundColor: '#ffffff',
+          }
     };
   };
    
