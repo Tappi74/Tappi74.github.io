@@ -17,7 +17,7 @@ const Footer = forwardRef((props, ref) => {
           </Typography>
           <Typography style={{paddingBottom: '10px'}} />
           <Typography className={classes.footerText}>
-            Myllykaari 12
+            Kaivolankatu 24 B
           </Typography>
           <Typography className={classes.footerText}>
             FI38700 Kankaanpää
