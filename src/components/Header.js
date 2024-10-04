@@ -104,7 +104,7 @@ import {
   
               {matches ? (
                 <Box>
-                <IconButton
+               {/*  <IconButton
                   size="large"
                   edge="end"
                   color="inherit"
@@ -112,7 +112,7 @@ import {
                   onClick={toggleDrawer('right', true)}
                 >
                   <MenuIcon className={classes.menuIcon} fontSize="" />
-                </IconButton>
+                </IconButton> */}
   
                 <Drawer
                   anchor="right"
