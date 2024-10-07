@@ -6,9 +6,12 @@ import useStyles from '../styles/styles';
 import Fade from '@mui/material/Fade';
 import Slide from '@mui/material/Slide';
 
-const Hero = () => {
+const Hero = (props) => {
   const classes = useStyles();
-
+  const onClick = () => {
+    props.onClick();  
+  }
+  
   return (
     <Box className={classes.heroBox}>
       <Grid container spacing={6} className={classes.gridContainer}>
@@ -26,6 +29,7 @@ const Hero = () => {
             Autamme sinua innovoimaan ja erottumaan alallasi.
           </Typography>
           <Button
+            onClick={onClick}
             variant="contained"
             color="primary"
             sx={{ width: '200px', fontSize: '16px' }}

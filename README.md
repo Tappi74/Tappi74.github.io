@@ -1,3 +1,8 @@
+Sivujen julkaisu:
+
+npm run deploy, upload sites to github gh-pages branch. Aja siis vain tämä komento, kun haluat sivut julkaista.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

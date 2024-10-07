@@ -29,16 +29,23 @@ const Blog = (props) => {
 
     useEffect(() => {
         contentFulResp.forEach((item, index) => {
-            console.log(index + " " + item.fields.title);
-            let object = {
-                id: index,
-                title: item.fields.title,
-                blog_image: item.fields.blogImage.fields.file.url,
-                statement: item.fields.post,
-                author: item.fields.author,
-                image_url: item.fields.authorImage.fields.file.url,
-            };
-            reviews.push(object);
+            console.log(item.sys.contentType.sys.id);
+            if (item.sys.contentType.sys.id === "blogPost") {
+                let myDate = new Date(item.fields.createDate);
+                //Format date to dd.mm.yy
+                let dateString = myDate.getDate() + "." + myDate.getMonth() + "." + myDate.getFullYear(); 
+                console.log(dateString);
+                let object = {
+                    id: index,
+                    title: item.fields.title,
+                    blog_image: item.fields.blogImage.fields.file.url,
+                    statement: item.fields.post,
+                    createDate: dateString,
+                    author: item.fields.author,
+                    image_url: item.fields.authorImage.fields.file.url,
+                };
+                reviews.push(object);
+            }
         });
     }, [contentFulResp]);
 
@@ -70,7 +77,7 @@ const Blog = (props) => {
                             <Card >
                                 <CardMedia
                                     component="img"
-                                    sx={{ height: 80}}
+                                    sx={{ height: 80 }}
                                     image={review.blog_image}
                                 />
                                 <CardContent>
@@ -87,7 +94,9 @@ const Blog = (props) => {
                                             className={classes.avatar}
                                         />
                                         <Box>
-                                            <Typography>{review.name}</Typography>
+                                            <Typography className={classes.testimonialPosition}>
+                                                {review.createDate}
+                                            </Typography>
                                             <Typography className={classes.testimonialPosition}>
                                                 {review.author}
                                             </Typography>

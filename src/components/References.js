@@ -1,40 +1,47 @@
-import React from 'react';
-import { Typography, Box, Card, CardContent, Grid } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Typography, Box, Card, CardContent, CardMedia, Grid } from '@mui/material';
 import { Avatar } from '@mui/material';
 import useStyles from '../styles/styles';
 import Slide from '@mui/material/Slide';
+import { createClient } from 'contentful';
 
 const References = (props) => {
+    const [contentFulResp, setContentFulResp] = useState([]);
+    const [reviews, setReviews] = useState([]);
     const classes = useStyles();
-    const reviews = [
+    const contentfulClient = createClient(
         {
-            id: 1,
-            name: 'Karl Brighton',
-            statement:
-                'The team perfectly fit the specialized skill set required. They focused on the most essential features helping us launch the platform eight months faster than planned.',
-            image_url:
-                'https://sweta-myteam-website-fm.netlify.app/static/media/avatar-kady.78fc482c.jpg',
-            position: 'Software Engineer at Kadex',
-        },
-        {
-            id: 2,
-            name: 'Krishna Pelle',
-            statement:
-                'We needed to automate our entire whole onboarding process. The team came in and built out the whole journey. Since going live, user retention has gone through the roof!',
-            image_url:
-                'https://sweta-myteam-website-fm.netlify.app/static/media/avatar-aiysha.e119a0c1.jpg',
-            position: 'Product Manager at Google',
-        },
-        {
-            id: 3,
-            name: 'Ben Spiff',
-            statement:
-                'Amazing. Our team helped us build an app that delivered a new experience for hiring a physio. The launch was an instant success with 100k downloads in the first month.',
-            image_url:
-                'https://sweta-myteam-website-fm.netlify.app/static/media/avatar-arthur.098c2e26.jpg',
-            position: 'Founder of Crypto',
-        },
-    ];
+            accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN,
+            space: process.env.REACT_APP_CONTENTFUL_SPACE_ID,
+        }
+    );
+
+    useEffect(() => {
+        contentfulClient.getEntries()
+            .then((response) => {
+                console.log(response.items);
+                setContentFulResp(response.items);
+            }).catch((error) => {
+                console.log(error);
+            });
+
+    }, []);
+
+    useEffect(() => {
+        contentFulResp.forEach((item, index) => {
+            if (item.sys.contentType.sys.id === "clientReference") {
+                console.log(item);
+                console.log(item.fields.shortStory.content[0].value);
+            let object = {
+                id: index,
+                logo: item.fields.logo.fields.file.url,
+                shortStory: item.fields.shortStory.content[0].content[0].value
+            };
+            reviews.push(object);
+        }
+        });
+    }, [contentFulResp]);
+    
     return (
         <Box
             sx={{
@@ -55,24 +62,16 @@ const References = (props) => {
                 {reviews.map((review) => (
                     <Grid item sm={12} md={4} key={review.id}>
                         <Slide direction="left" in={props.slide} timeout={1000} key={review.id}>
-                        <Card className={classes.testimonialCard}>
+                        <Card>
                             <CardContent>
+                                <CardMedia
+                                    component="img"
+                                    sx={{ height: 70, objectFit: "contain", marginLeft: '10px', paddingRight: '20px', paddingBottom: '20px',  alignItems: 'center'  }}
+                                    image={review.logo}
+                                />
                                 <Typography className={classes.testimonialStatement}>
-                                    "{review.statement}"
+                                    {review.shortStory}
                                 </Typography>
-                                <Box sx={{ display: 'flex' }}>
-                                    <Avatar
-                                        src={review.image_url}
-                                        size="large"
-                                        className={classes.avatar}
-                                    />
-                                    <Box>
-                                        <Typography>{review.name}</Typography>
-                                        <Typography className={classes.testimonialPosition}>
-                                            {review.position}
-                                        </Typography>
-                                    </Box>
-                                </Box>
                             </CardContent>
                         </Card>
                         </Slide>
