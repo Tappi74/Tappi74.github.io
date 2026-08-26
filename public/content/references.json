@@ -1,5 +1,12 @@
 [
   {
+    "id": "reference-1787771396708",
+    "name": "Jatelco",
+    "years": "2020-",
+    "description": "",
+    "visible": true
+  },
+  {
     "id": "trendion",
     "name": "Trendion",
     "years": "2014—",
@@ -38,13 +45,6 @@
     "id": "jalava",
     "name": "Jalava",
     "years": "2013–2014",
-    "description": "",
-    "visible": true
-  },
-  {
-    "id": "reference-1787771396708",
-    "name": "Jatelco",
-    "years": "2020-",
     "description": "",
     "visible": true
   }
