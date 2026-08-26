@@ -1,0 +1,51 @@
+[
+  {
+    "id": "reference-1787771396708",
+    "name": "Jatelco",
+    "years": "2020-",
+    "description": "",
+    "visible": true
+  },
+  {
+    "id": "trendion",
+    "name": "Trendion",
+    "years": "2014—",
+    "description": "",
+    "visible": true
+  },
+  {
+    "id": "clothing-plus",
+    "name": "Clothing+",
+    "years": "2005–2013",
+    "description": "",
+    "visible": true
+  },
+  {
+    "id": "decido",
+    "name": "Decido",
+    "years": "2015—",
+    "description": "",
+    "visible": true
+  },
+  {
+    "id": "wm-plast",
+    "name": "WM-Plast",
+    "years": "2015—",
+    "description": "",
+    "visible": true
+  },
+  {
+    "id": "tappit-services",
+    "name": "TappIT Services",
+    "years": "2012—",
+    "description": "",
+    "visible": true
+  },
+  {
+    "id": "jalava",
+    "name": "Jalava",
+    "years": "2013–2014",
+    "description": "",
+    "visible": true
+  }
+]
