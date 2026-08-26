@@ -11,15 +11,26 @@ function slugify(value) { return value.toLowerCase().normalize('NFD').replace(/[
 function setSaving(text, error = false) { $('save-state').textContent = text; $('save-state').style.color = error ? '#a32828' : ''; }
 
 async function api(path, options = {}) {
-  const response = await fetch(`${API}${path}${options.method ? '' : `?ref=${BRANCH}`}`, { ...options, headers: { ...headers(), ...(options.headers || {}) } });
-  if (!response.ok) throw new Error((await response.json().catch(() => ({}))).message || `GitHub-virhe ${response.status}`);
+  const response = await fetch(`${API}${path}${options.method ? '' : `?ref=${BRANCH}&_=${Date.now()}`}`, { cache: 'no-store', ...options, headers: { ...headers(), ...(options.headers || {}) } });
+  if (!response.ok) {
+    const error = new Error((await response.json().catch(() => ({}))).message || `GitHub-virhe ${response.status}`);
+    error.status = response.status;
+    throw error;
+  }
   return response.status === 204 ? null : response.json();
 }
 async function readJson(path) { const file = await api(path); return JSON.parse(decode(file.content)); }
 async function saveFile(path, content, message) {
   let sha;
   try { sha = (await api(path)).sha; } catch (error) { if (!error.message.includes('Not Found')) throw error; }
-  return api(path, { method: 'PUT', body: JSON.stringify({ message, content: encode(content), branch: BRANCH, ...(sha ? { sha } : {}) }) });
+  const write = (currentSha) => api(path, { method: 'PUT', body: JSON.stringify({ message, content: encode(content), branch: BRANCH, ...(currentSha ? { sha: currentSha } : {}) }) });
+  try {
+    return await write(sha);
+  } catch (error) {
+    if (error.status !== 409 && error.status !== 422) throw error;
+    const latest = await api(path);
+    return write(latest.sha);
+  }
 }
 
 async function connect(token) {
