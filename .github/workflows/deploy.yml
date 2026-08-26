@@ -1,0 +1,36 @@
+name: Julkaise GitHub Pagesiin
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Nouda lähdekoodi
+        uses: actions/checkout@v4
+      - name: Ota Node.js käyttöön
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Asenna riippuvuudet
+        run: npm ci
+      - name: Rakenna sivusto
+        run: npm run build
+      - name: Julkaise gh-pages-haaraan
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          publish_branch: gh-pages
+          force_orphan: true
