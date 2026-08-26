@@ -24,7 +24,7 @@ jobs:
           node-version: 20
           cache: npm
       - name: Asenna riippuvuudet
-        run: npm install --no-audit --no-fund
+        run: npm install --legacy-peer-deps --no-audit --no-fund
       - name: Rakenna sivusto
         run: npm run build
       - name: Julkaise gh-pages-haaraan
